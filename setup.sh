@@ -1,3 +1,5 @@
+export $(xargs <.env)
+
 docker run --name nginx-proxy --restart always -d -p 80:80 -p 443:443 \
     -v ~/.ee4/etc/nginx/certs:/etc/nginx/certs \
     -v ~/.ee4/etc/nginx/conf.d:/etc/nginx/conf.d \
@@ -13,8 +15,8 @@ docker run -d --name letsencrypt \
     --volumes-from nginx-proxy \
     jrcs/letsencrypt-nginx-proxy-companion
 
-docker network connect waterweasel.xyz nginx-proxy
-docker network connect waterweasel.xyz letsencrypt
+docker network connect $VIRTUAL_HOST nginx-proxy
+docker network connect $VIRTUAL_HOST letsencrypt
 
 docker-compose up -d
 

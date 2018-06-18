@@ -1,5 +1,7 @@
 export $(xargs <.env)
 
+docker network create $VIRTUAL_HOST
+
 docker run --name nginx-proxy --restart always -d -p 80:80 -p 443:443 \
     -v ~/.ee4/etc/nginx/certs:/etc/nginx/certs \
     -v ~/.ee4/etc/nginx/conf.d:/etc/nginx/conf.d \

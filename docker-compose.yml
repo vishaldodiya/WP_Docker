@@ -29,8 +29,7 @@ services:
       - site-network
 
   php:
-    build:
-      context: ./config/php-fpm/
+    image: rtcamp/wordpress:latest
     links:
       - db:mysql
     restart: always
